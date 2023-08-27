@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EstoqueController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/estoques', [EstoqueController::class, 'index']);
+Route::post('/estoques', [EstoqueController::class, 'store']);
+Route::put('/estoques/{estoque}', [EstoqueController::class, 'update']);
+Route::patch('/estoques/{estoque}', [EstoqueController::class, 'update']);
+Route::delete('/estoques/{estoque}', [EstoqueController::class, 'destroy']);
