@@ -80,4 +80,38 @@ class EstoqueController extends Controller
         // para indicar que a operação foi bem-sucedida e o recurso foi excluído.
         return response()->json(null, 204);
     }
+
+    /**
+     * Retorna a lista de produtos associados ao estoque especificado.
+     *
+     * @param \App\Models\Estoque $estoque Instância do modelo Estoque
+     * @return \Illuminate\Http\JsonResponse Retorna a lista de produtos como JSON
+     */
+    public function produtos(Estoque $estoque)
+    {
+        // Obtém a lista de produtos associados ao estoque
+        $produtos = $estoque->produtos;
+
+        // Retorna a lista de produtos como resposta JSON
+        return response()->json($produtos);
+    }
+
+    /**
+     * Relaciona produtos ao estoque especificado.
+     *
+     * @param \Illuminate\Http\Request $request Requisição HTTP com os IDs dos produtos
+     * @param \App\Models\Estoque $estoque Instância do modelo Estoque
+     * @return \Illuminate\Http\JsonResponse Retorna o estoque com os produtos relacionados
+     */
+    public function relaciona_produtos(Request $request, Estoque $estoque)
+    {
+        // Obtém a lista de IDs de produtos do corpo da requisição
+        $produtosIds = $request->input('produtos_ids', []);
+
+        // Remove quaisquer associações anteriores e associa os novos produtos
+        $estoque->produtos()->sync($produtosIds);
+
+        // Retorna o estoque com os produtos relacionados
+        return response()->json($estoque->produtos);
+    }
 }

@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Estoque extends Model
+class EstoqueProduto extends Model
 {
     use HasFactory;
+    protected $table = 'estoques_produtos';
 
     /**
      * Lista de campos 
@@ -18,16 +19,7 @@ class Estoque extends Model
      * um registro de estoque
      */
     protected $fillable = [
-        'nome',
+        'estoque_id',
+        'produto_id',
     ];
-
-    /**
-     * Relaciona estoques e produtos
-     * através da tabela estoques_produtos
-     * muitos para muitos 
-     */
-    public function produtos()
-    {
-        return $this->belongsToMany(Produto::class, 'estoques_produtos');
-    }
 }
