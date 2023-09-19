@@ -114,4 +114,10 @@ class EstoqueController extends Controller
         // Retorna o estoque com os produtos relacionados
         return response()->json($estoque->produtos);
     }
+
+    public function seleciona_estoque($id)
+    {
+        $estoque = Estoque::find($id);
+        return response()->json($estoque);
+    }
 }
