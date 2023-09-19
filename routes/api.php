@@ -21,12 +21,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/estoques', [EstoqueController::class, 'index']);
+Route::get('/estoques/{estoque}', [EstoqueController::class, 'seleciona_estoque']);
+Route::get('/estoques/{estoque}/produtos', [EstoqueController::class, 'produtos']);
 Route::post('/estoques', [EstoqueController::class, 'store']);
 Route::put('/estoques/{estoque}', [EstoqueController::class, 'update']);
+Route::put('estoques/{estoque}/relaciona_produtos', [EstoqueController::class, 'relaciona_produtos']);
 Route::patch('/estoques/{estoque}', [EstoqueController::class, 'update']);
 Route::delete('/estoques/{estoque}', [EstoqueController::class, 'destroy']);
-Route::get('/estoques/{estoque}/produtos', [EstoqueController::class, 'produtos']);
-Route::put('estoques/{estoque}/relaciona_produtos', [EstoqueController::class, 'relaciona_produtos']);
 
 Route::get('/produtos', [ProdutoController::class, 'index']);
 Route::post('/produtos', [ProdutoController::class, 'store']);
